@@ -4,14 +4,14 @@
             <div class="footer-col">
                 <div class="footer-logo">
                     <span class="logo-icon"><i class="fas fa-code"></i></span>
-                    <span class="logo-text">Tech<span class="highlight">Vista</span></span>
+                    <span class="logo-text">Divine<span class="highlight">SyncServe</span></span>
                 </div>
                 <p class="footer-desc">Empowering businesses with cutting-edge IT solutions and innovative technology services.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com/divinesyncserve" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/divinesyncserve" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/divinesyncserve" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/divinesyncserve" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             
@@ -38,15 +38,15 @@
             <div class="footer-col">
                 <h3 class="footer-title">Contact Info</h3>
                 <ul class="footer-contact">
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon Valley</li>
-                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> info@techvista.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Near Chandkheda, Ahmedabad, Gujarat 382424</li>
+                    <li><i class="fas fa-phone"></i> +91 6352 821 523</li>
+                    <li><i class="fas fa-envelope"></i> info@divineayncserv.com</li>
                 </ul>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 TechVista. All rights reserved.</p>
+            <p>&copy; 2024 DivineSyncServe. All rights reserved.</p>
         </div>
     </div>
 </footer>

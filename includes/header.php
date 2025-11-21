@@ -4,7 +4,7 @@
             <div class="nav-wrapper">
                 <a href="index.php" class="logo">
                     <span class="logo-icon"><i class="fas fa-code"></i></span>
-                    <span class="logo-text">Tech<span class="highlight">Vista</span></span>
+                    <span class="logo-text">Divine<span class="highlight">SyncServe</span></span>
                 </a>
                 
                 <ul class="nav-menu" id="navMenu">

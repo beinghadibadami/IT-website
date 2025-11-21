@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="contact-text">
                             <h4>Office Address</h4>
-                            <p>123 Tech Street, Silicon Valley<br>CA 94025, United States</p>
+                            <p>Near Chandkheda, Ahmedabad<br>Gujarat 382424, India</p>
                         </div>
                     </div>
                     
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="contact-text">
                             <h4>Phone Number</h4>
-                            <p>+1 (555) 123-4567<br>Mon-Fri, 9AM-6PM PST</p>
+                            <p>+91 6352 821 523<br>Mon-Fri, 9AM-6PM IST</p>
                         </div>
                     </div>
                     
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="contact-text">
                             <h4>Email Address</h4>
-                            <p>info@techvista.com<br>support@techvista.com</p>
+                            <p>info@divineayncserv.com</p>
                         </div>
                     </div>
                 </div>
@@ -83,10 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="social-connect">
                     <h4>Connect With Us</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/divinesyncserve" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/divinesyncserve" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com/company/divinesyncserve" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/divinesyncserve" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -109,22 +109,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form id="contactForm" method="POST" class="contact-form">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required placeholder='Enter your full name'>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required placeholder='Enter your email address'>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="number" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10">
+                        <input type="number" id="phone" name="phone" pattern="[0-9]" maxlength="10" placeholder='Enter your phone number'>
                     </div>
                     
                     <div class="form-group">
                         <label for="message">Your Message *</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
+                        <textarea id="message" name="message" rows="6" required placeholder='Enter your message here'></textarea>
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-block">Send Message</button>

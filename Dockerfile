@@ -3,7 +3,7 @@
 # - Serves the application from /var/www/html
 # - Listens on the PORT environment variable (Render sets this, default 10000)
 
-FROM php:8.2-cli
+FROM php:8.4.15-cli
 
 # Install PostgreSQL PDO extension
 RUN apt-get update \

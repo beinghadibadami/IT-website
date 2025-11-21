@@ -1,16 +1,16 @@
 <?php
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-$title = "TechVista - Innovative IT Solutions";
+$title = "DivineSyncServe - Innovative IT Solutions";
 
 switch($page) {
     case 'services':
-        $title = "Our Services - TechVista";
+        $title = "Our Services - DivineSyncServe";
         break;
     case 'about':
-        $title = "About Us - TechVista";
+        $title = "About Us - DivineSyncServe";
         break;
     case 'contact':
-        $title = "Contact Us - TechVista";
+        $title = "Contact Us - DivineSyncServe";
         break;
 }
 ?>

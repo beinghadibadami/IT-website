@@ -1,6 +1,6 @@
 <section class="page-hero">
     <div class="container">
-        <h1 class="page-title">About TechVista</h1>
+        <h1 class="page-title">About DivineSyncServe</h1>
         <p class="page-subtitle">Pioneering excellence in IT solutions since 2010</p>
     </div>
 </section>
@@ -10,7 +10,7 @@
         <div class="about-grid">
             <div class="about-text" data-aos="fade-right">
                 <h2 class="section-title">Our Story</h2>
-                <p>Founded in 2010, TechVista emerged from a vision to revolutionize how businesses leverage technology. What started as a small team of passionate developers has grown into a leading IT solutions provider serving clients worldwide.</p>
+                <p>Founded in 2010, DivineSyncServe emerged from a vision to revolutionize how businesses leverage technology. What started as a small team of passionate developers has grown into a leading IT solutions provider serving clients worldwide.</p>
                 <p>We believe in the transformative power of technology and its ability to drive innovation, efficiency, and growth. Our mission is to empower businesses with cutting-edge solutions that not only meet today's challenges but anticipate tomorrow's opportunities.</p>
                 <p>With over a decade of experience, we've successfully delivered 500+ projects across various industries, maintaining a 98% client satisfaction rate and building long-lasting partnerships.</p>
             </div>
@@ -94,7 +94,7 @@
                 <div class="team-photo">
                     <i class="fas fa-user-tie"></i>
                 </div>
-                <h3 class="team-name">John Anderson</h3>
+                <h3 class="team-name">Aarav Mehta</h3>
                 <p class="team-role">CEO & Founder</p>
                 <p class="team-bio">15+ years of experience in technology leadership and business strategy.</p>
             </div>
@@ -102,7 +102,7 @@
                 <div class="team-photo">
                     <i class="fas fa-user-tie"></i>
                 </div>
-                <h3 class="team-name">Sarah Mitchell</h3>
+                <h3 class="team-name">Priya Shah</h3>
                 <p class="team-role">CTO</p>
                 <p class="team-bio">Expert in cloud architecture and enterprise software development.</p>
             </div>
@@ -110,7 +110,7 @@
                 <div class="team-photo">
                     <i class="fas fa-user-tie"></i>
                 </div>
-                <h3 class="team-name">Michael Chen</h3>
+                <h3 class="team-name">Rahul Verma</h3>
                 <p class="team-role">Head of AI/ML</p>
                 <p class="team-bio">Pioneering AI solutions with a PhD in Machine Learning from MIT.</p>
             </div>
@@ -118,7 +118,7 @@
                 <div class="team-photo">
                     <i class="fas fa-user-tie"></i>
                 </div>
-                <h3 class="team-name">Emily Roberts</h3>
+                <h3 class="team-name">Daniel Harris</h3>
                 <p class="team-role">Director of Operations</p>
                 <p class="team-bio">Ensuring seamless project delivery and client satisfaction.</p>
             </div>
