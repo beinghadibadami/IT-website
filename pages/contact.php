@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="contact-text">
                             <h4>Office Address</h4>
-                            <p>Near Chandkheda, Ahmedabad<br>Gujarat 382424, India</p>
+                            <p>7th Floor 708 Aakruti Complex, Nr Stadium Navrangpura, Ahmedabad<br>Gujarat 380009, India</p>
                         </div>
                     </div>
                     
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="contact-text">
                             <h4>Phone Number</h4>
-                            <p>+91 6352 821 523<br>Mon-Fri, 9AM-6PM IST</p>
+                            <p>+91 8866636848<br>Mon-Fri, 9AM-6PM IST</p>
                         </div>
                     </div>
                     

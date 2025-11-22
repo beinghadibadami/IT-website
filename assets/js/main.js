@@ -195,3 +195,42 @@ document.querySelectorAll('a[href^="index.php"]').forEach(link => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
+
+// Simple toast notifications (used for cart actions)
+function showToast(message, type = 'success') {
+    const existing = document.querySelector('.toast-container');
+    let container = existing;
+
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-' + type;
+
+    const icon = document.createElement('span');
+    icon.className = 'toast-icon';
+    icon.innerHTML = '<i class="fas fa-check-circle"></i>';
+
+    if (type === 'warning') {
+        icon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+    }
+
+    const text = document.createElement('span');
+    text.className = 'toast-message';
+    text.textContent = message;
+
+    toast.appendChild(icon);
+    toast.appendChild(text);
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('toast-hide');
+        toast.addEventListener('transitionend', () => {
+            toast.remove();
+        });
+    }, 3000);
+}

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "u_6921d7a488ae45.79827449",
+        "full_name": "hadi badami",
+        "email": "mohammadhadibadami@gmail.com",
+        "username": "hadi.dev",
+        "phone": "9939393933933",
+        "password_hash": "$2y$12$1Y8W8K6I5tiHc.1IBfVtleg6zngDpn3.PIrkDxUlBElfW35t6Sx.e",
+        "created_at": "2025-11-22T15:32:53+00:00"
+    },
+    {
+        "id": "u_6921db1ddf5621.02275363",
+        "full_name": "ada",
+        "email": "abhasverse@gmail.com",
+        "username": "asteroid-destroyer",
+        "phone": "99749841111",
+        "password_hash": "$2y$12$.6fjT3iaewkxRMtLUf9tQ.m74NZZ.fge6fgI1kVrDFdZI3nUFMbVi",
+        "created_at": "2025-11-22T15:47:42+00:00"
+    },
+    {
+        "id": "u_6921dba8b456c5.47819303",
+        "full_name": "hadi badami",
+        "email": "adc@gmail.com",
+        "username": "hadi_badami_14",
+        "phone": "29293919391",
+        "password_hash": "$2y$12$nOVBufgM3YRT4DvJexsNre6v0PyLVX65IS6stdcrPWou1fbbVGRQm",
+        "created_at": "2025-11-22T15:50:01+00:00"
+    }
+]
