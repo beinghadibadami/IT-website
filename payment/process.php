@@ -1,12 +1,23 @@
 <?php
 header('Cache-Control: no-cache, no-store, must-revalidate');
 require_once '../includes/config.php';
+require_once '../includes/auth.php';
 
 $service = $_POST['service'] ?? '';
 $clientAmount = $_POST['amount'] ?? '';
-$name = $_POST['name'] ?? '';
-$email = $_POST['email'] ?? '';
-$phone = $_POST['phone'] ?? '';
+
+// For cart checkout and other payments, ensure user is logged in
+$currentUser = auth_current_user();
+if (!$currentUser) {
+    $_SESSION['toast_message'] = 'Please login to complete your payment';
+    $_SESSION['toast_type'] = 'warning';
+    header('Location: ../index.php?page=login');
+    exit;
+}
+
+$name = $currentUser['full_name'] ?? '';
+$email = $currentUser['email'] ?? '';
+$phone = $currentUser['phone'] ?? '';
 
 if (empty($service) || empty($name) || empty($email)) {
     header('Location: ../index.php?page=services&error=invalid');

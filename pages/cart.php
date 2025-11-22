@@ -38,6 +38,8 @@ if (isset($_GET['added']) && !$cartToastMessage) {
 
 $cartItems = getCart();
 $total = getCartTotal();
+$currentUser = function_exists('auth_current_user') ? auth_current_user() : null;
+
 ?>
 
 <div class="container my-5">
@@ -47,20 +49,23 @@ $total = getCartTotal();
     </div>
 
     <?php if (empty($cartItems)): ?>
-        <div class="text-center py-5">
-            <div class="mb-4">
-                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center"
-                    style="width: 100px; height: 100px;">
-                    <i class="fas fa-shopping-cart fa-3x text-muted opacity-50"></i>
-                </div>
-            </div>
-            <h3 class="fw-bold text-dark mb-3">Your cart is empty</h3>
-            <p class="text-muted mb-4">Looks like you haven't added any templates to your cart yet.<br>Find the perfect
-                template for your project!</p>
-            <a href="index.php?page=templates" class="btn btn-dark btn-lg rounded-3 px-5 fw-bold">
-                Browse Templates
-            </a>
+        <div class="cart-empty text-center py-5 d-flex flex-column justify-content-center align-items-center" 
+     style="min-height: 70vh;">
+    <div class="cart-empty-icon mb-4">
+        <div class="icon-circle d-flex align-items-center justify-content-center mx-auto" 
+             style="width: 100px; height: 100px; border-radius: 50%; background-color: #f0f0f0;">
+            <i class="fas fa-shopping-cart" style="font-size: 2.5rem; color: #6c757d;"></i>
         </div>
+    </div>
+    <br>
+    <h3 class="fw-bold mb-2">Your cart is empty</h3>
+    <br>
+    <p class="text-muted mb-4" style="max-width: 500px;">Looks like you haven't added any templates yet. Explore our collection and find the perfect design for your next project.</p>
+    <br>
+    <a href="index.php?page=templates" class="btn btn-dark btn-lg rounded-3 px-5 fw-bold">
+        Browse Templates
+    </a>
+</div>
     <?php else: ?>
         <div class="row g-5">
             <div class="col-lg-8">
@@ -77,6 +82,7 @@ $total = getCartTotal();
                             ?>
                             <div class="cart-item p-4 border-bottom bg-light">
                                 <div class="row align-items-center">
+
                                     <div class="col-md-2">
                                         <img src="<?php echo $item['images'][0]; ?>"
                                             alt="<?php echo htmlspecialchars($item['name']); ?>"
@@ -84,7 +90,7 @@ $total = getCartTotal();
 
                                     </div>
                                     <div class="col-md-4">
-                                        <h5 class="fw-bold mb-1"><?php echo htmlspecialchars($item['name']); ?></h5>
+                                        <h5 class="fw-bold md-4"><?php echo htmlspecialchars($item['name']); ?></h5>
                                         <p class="text-muted small mb-0">Single License</p>
                                     </div>
                                     <div class="col-md-3">
@@ -123,13 +129,15 @@ $total = getCartTotal();
                         <?php endforeach; ?>
                     </div>
                     <div class="card-footer bg-white p-4">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center cart-actions">
+
                             <form method="POST">
                                 <input type="hidden" name="clear_cart" value="1">
                                 <button type="submit" class="btn btn-dark btn-sm rounded-3 px-3">
                                     Clear Cart
                                 </button>
                             </form>
+                             <?php echo "<br>"?>
                             <a href="index.php?page=templates"
                                 class="btn btn-dark btn-sm rounded-3 px-3 text-decoration-none">
                                 Continue Shopping
@@ -145,33 +153,48 @@ $total = getCartTotal();
                         <h4 class="fw-bold mb-4">Order Summary</h4>
 
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="text-muted">Subtotal</span>
+                             <?php echo "<br>"?>
+                            <span class="text-muted">Subtotal</span><br>
                             <span class="fw-bold">₹<?php echo number_format($total, 2); ?></span>
                         </div>
 
                         <hr class="my-4 border-secondary opacity-10">
 
-                        <div class="d-flex justify-content-between mb-4">
+                        <!-- <div class="d-flex justify-content-between mb-4">
+                             <?php echo "<br>"?>
                             <span class="h5 fw-bold">Total</span>
                             <span class="h4 fw-bold text-dark">₹<?php echo number_format($total, 2); ?></span>
-                        </div>
+                        </div> -->
 
                         <!-- Checkout Form -->
-                        <form action="payment/process.php" method="POST">
-                            <input type="hidden" name="service" value="Cart Checkout">
-                            <input type="hidden" name="amount" value="<?php echo $total; ?>">
+                        <?php if ($currentUser): ?>
+                            <form action="payment/process.php" method="POST">
+                                <input type="hidden" name="service" value="Cart Checkout">
+                                <input type="hidden" name="amount" value="<?php echo $total; ?>">
+                                <input type="hidden" name="name" value="<?php echo htmlspecialchars($currentUser['full_name']); ?>">
+                                <input type="hidden" name="email" value="<?php echo htmlspecialchars($currentUser['email']); ?>">
+                                <input type="hidden" name="phone" value="<?php echo htmlspecialchars($currentUser['phone']); ?>">
 
+                                <div class="alert alert-danger small mb-3">
+                                    After successful payment, your templates will be available in the "My Account" section.
+                                </div>
+
+                                <button type="submit" class="btn btn-dark w-100 py-3 rounded-3 fw-bold shadow-sm mb-1">
+                                    Proceed to Checkout With PayU
+                                </button>
+                            </form>
+                        <?php else: ?>
                             <div class="alert alert-danger small mb-3">
-                                After Successful Payment! Download your Templates from "My Account" Section.
+                                Please login to complete your purchase.
                             </div>
-
-                            <button type="submit" class="btn btn-dark w-100 py-3 rounded-3 fw-bold shadow-sm mb-1">
-                                Proceed to Checkout With PayU
-                            </button>
-                        </form>
+                            <a href="index.php?page=login" class="btn btn-dark w-100 py-3 rounded-3 fw-bold shadow-sm mb-1">
+                                Login to Checkout
+                            </a>
+                        <?php endif; ?>
 
                         <div class="mt-4">
-                            <h6 class="fw-bold mb-2">Secure Checkout</h6>
+                            <!-- <h6 class="fw-bold mb-2">Secure Checkout</h6> -->
+                             <?php echo "<br>"?>
                             <p class="text-muted small mb-0">We use secure payment processing to ensure your information is
                                 always protected.</p>
                         </div>

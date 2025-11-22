@@ -65,12 +65,12 @@ if (!$template) {
                 </span>
 
                 <h1 class="h3 fw-bold mb-1"><?php echo htmlspecialchars($template['name']); ?></h1>
-                <p class="text-muted mb-3">Barber Shop</p>
-
+                <!-- <p class="text-muted mb-3">Barber Shop</p> -->
+                <br>
                 <div class="d-flex align-items-baseline mb-5"> 
                     <span class="h2 fw-bold me-2">₹<?php echo number_format($template['price'], 2); ?></span>
                 </div>
-
+                <br>
                 <form method="POST" class="mb-5">
                     <div class="d-grid">
                         <button type="submit" name="buy_now" value="1"
@@ -82,7 +82,7 @@ if (!$template) {
                         </button>
                     </div>
                 </form>
-
+                <br>
                 <h5 class="fw-bold mb-3">Template Features</h5>
                 <ul class="list-unstyled mb-5"> 
                     <?php foreach ($template['features'] as $feature): ?>
@@ -90,14 +90,14 @@ if (!$template) {
                             <span><?php echo htmlspecialchars($feature); ?></span>
                         </li>
                     <?php endforeach; ?>
-                </ul>
-
+                <br>
                 <div class="row small text-muted">
                     <div class="col-6 mb-2">
                         <div class="fw-semibold">File Format</div>
                         <div><?php echo htmlspecialchars($template['file_format']); ?></div>
                     </div>
-                    </div>
+                </div>
+                <br>
             </div>
             <div class="card-footer bg-light p-3 text-center small text-muted">
                 <i class="fas fa-lock me-1"></i> Secure payment via PayU
