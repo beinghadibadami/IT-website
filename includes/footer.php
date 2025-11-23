@@ -56,7 +56,7 @@
                     <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i> 7th Floor 708 Aakruti Complex, Nr Stadium
                         Navrangpura, Ahmedabad</p>
                     <p class="mb-1"><i class="fas fa-phone me-2"></i> +91 8866636848</p>
-                    <p class="mb-0"><i class="fas fa-envelope me-2"></i> info@divinesyncserv.com</p>
+                    <p class="mb-0"><i class="fas fa-envelope me-2"></i> info.divinesyncserv@gmail.com</p>
                     
                 </div>
                 <div class="col-md-6 text-md-end">
