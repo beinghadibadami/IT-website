@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="contact-text">
                             <h4>Email Address</h4>
-                            <p>info@divineayncserv.com</p>
+                            <p>info@divinesyncserv.com</p>
                         </div>
                     </div>
                 </div>
