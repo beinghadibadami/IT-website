@@ -41,9 +41,9 @@ $TEMPLATES = [
     ],
     [
         'id' => 'tpl_002',
-        'name' => 'Logo Design',
+        'name' => 'Office Master',
         'category_slug' => 'website-templates',
-        'price' => 1000,
+        'price' => 11000,
         'description' => 'Professional corporate website template suitable for agencies, consulting firms, and businesses.',
         'features' => ['Responsive Design', 'Contact Form', 'About Us Page', 'Team Section'],
         'images' => [
@@ -62,7 +62,7 @@ $TEMPLATES = [
         'id' => 'tpl_003',
         'name' => 'Medlife Master',
         'category_slug' => 'website-templates',
-        'price' => 1500,
+        'price' => 10000,
         'description' => 'Clean and trustworthy template for medical clinics, hospitals, and doctors.',
         'features' => ['Appointment Booking', 'Doctor Profiles', 'Department Services', 'Emergency Contacts'],
         'images' => [
@@ -81,7 +81,7 @@ $TEMPLATES = [
         'id' => 'tpl_004',
         'name' => 'Landscape Master',
         'category_slug' => 'website-templates',
-        'price' => 500,
+        'price' => 12000,
         'description' => 'Beautiful template for landscaping, gardening, and outdoor services.',
         'features' => ['Portfolio Gallery', 'Service Request Form', 'Testimonials', 'Green Theme'],
         'images' => [
@@ -100,7 +100,7 @@ $TEMPLATES = [
         'id' => 'tpl_005',
         'name' => 'Shopify Pro',
         'category_slug' => 'ecommerce-templates',
-        'price' => 1500,
+        'price' => 15000,
         'description' => 'High-converting eCommerce template optimized for sales and user experience.',
         'features' => ['Product Filtering', 'Quick View', 'Cart Drawer', 'Mobile Optimized'],
         'images' => [
@@ -119,7 +119,7 @@ $TEMPLATES = [
         'id' => 'tpl_006',
         'name' => 'Fashion Store',
         'category_slug' => 'ecommerce-templates',
-        'price' => 2000,
+        'price' => 14000,
         'description' => 'Trendy fashion store template with lookbook features and instagram integration.',
         'features' => ['Lookbook', 'Size Guide', 'Newsletter Popup', 'Social Sharing'],
         'images' => [
@@ -155,7 +155,7 @@ $TEMPLATES = [
         'id' => 'tpl_008',
         'name' => 'Dashboard Admin',
         'category_slug' => 'cms-templates',
-        'price' => 1250,
+        'price' => 12500,
         'description' => 'Powerful admin dashboard template with charts, tables, and widgets.',
         'features' => ['Analytics Charts', 'User Management', 'Data Tables', 'Notifications'],
         'images' => [
@@ -212,7 +212,7 @@ $TEMPLATES = [
         'id' => 'tpl_011',
         'name' => 'Creative Agency One Page',
         'category_slug' => 'website-templates',
-        'price' => 2000,
+        'price' => 9000,
         'description' => 'Single-page creative agency website with hero section, portfolio grid and testimonials.',
         'features' => ['One-page Layout', 'Portfolio Grid', 'Client Logos', 'Contact Form'],
         'images' => [
@@ -231,7 +231,7 @@ $TEMPLATES = [
         'id' => 'tpl_012',
         'name' => 'SaaS Landing Page',
         'category_slug' => 'web-templates',
-        'price' => 10000,
+        'price' => 11500,
         'description' => 'High-conversion SaaS landing page with pricing tables, FAQs and app screenshots.',
         'features' => ['Hero with CTA', 'Pricing Tables', 'FAQ Accordion', 'Testimonial Slider'],
         'images' => [
@@ -288,7 +288,7 @@ $TEMPLATES = [
         'id' => 'tpl_015',
         'name' => 'Education LMS Dashboard',
         'category_slug' => 'data-visualization',
-        'price' => 1500,
+        'price' => 13500,
         'description' => 'Analytics dashboard UI for online learning platforms and academies.',
         'features' => ['Course Analytics', 'Student Progress', 'Revenue Charts', 'Dark Mode'],
         'images' => [
@@ -328,6 +328,7 @@ $TEMPLATES = [
         'description' => 'Set of landing, thank-you and upsell pages for high-performing marketing funnels.',
         'features' => ['Lead Capture Page', 'Thank You Page', 'Upsell Page', 'Responsive Layout'],
         'images' => [
+            'images/seo-3.png',
             'images/seo-1.png',
             'images/seo-2.png'
         ],
@@ -364,6 +365,7 @@ $TEMPLATES = [
         'description' => 'Mobile app UI kit for clinics and hospitals with booking and consultation flows.',
         'features' => ['Appointment Flow', 'Doctor Profiles', 'Chat Screens', 'Light & Dark Variants'],
         'images' => [
+            'images/med-2.png',
             'images/med-1.png',
             'images/med-3.png'
         ],
@@ -418,8 +420,9 @@ $TEMPLATES = [
         'description' => 'Modern school website with admissions, classes, events and staff pages.',
         'features' => ['Admissions Page', 'Class Timetable', 'Events Calendar', 'Faculty Profiles'],
         'images' => [
-            'images/edu1.png',
-            'images/edu2.png'
+            'images/ed1.png',
+            'images/ed2.png',
+            'images/ed3.png'
         ],
         'author' => 'CampusWeb',
         'rating' => 4.3,
@@ -436,7 +439,8 @@ $TEMPLATES = [
         'description' => 'Brochure-style template for promoting university programs and departments.',
         'features' => ['Program Overview', 'Curriculum Outline', 'Alumni Stories', 'Contact Details'],
         'images' => [
-            'images/edu2.png'
+            'images/edu2.png',
+            'images/edu3.png'
         ],
         'author' => 'AcademiaDeck',
         'rating' => 4.1,
@@ -449,7 +453,7 @@ $TEMPLATES = [
         'id' => 'tpl_024',
         'name' => 'Drag & Drop Page Builder Kit',
         'category_slug' => 'page-builders',
-        'price' => 7000,
+        'price' => 13000,
         'description' => 'Block-based layout kit with reusable sections for landing pages and marketing sites.',
         'features' => ['Header & Hero Blocks', 'Pricing Sections', 'FAQ Blocks', 'Footer Variants'],
         'images' => [
@@ -468,7 +472,7 @@ $TEMPLATES = [
         'id' => 'tpl_025',
         'name' => 'Landing Blocks Library',
         'category_slug' => 'page-builders',
-        'price' => 8000,
+        'price' => 12000,
         'description' => 'Collection of ready-to-use landing page sections for any industry.',
         'features' => ['Hero Variants', 'Feature Grids', 'CTA Sections', 'Contact Blocks'],
         'images' => [
@@ -491,9 +495,9 @@ $TEMPLATES = [
         'description' => 'Informational microsite template for hospitals and health campaigns.',
         'features' => ['Condition Library', 'Doctor Profiles', 'Appointment CTA', 'FAQ Section'],
         'images' => [
+            'images/medical3.png',
             'images/medical1.png',
-            'images/medical2.png',
-            'images/medical3.png'
+            'images/medical2.png'
         ],
         'author' => 'HealthEdu',
         'rating' => 4.5,
@@ -510,8 +514,9 @@ $TEMPLATES = [
         'description' => 'Full-service digital marketing agency site with services, case studies and lead forms.',
         'features' => ['Services Overview', 'Case Studies', 'Blog Section', 'Lead Capture Form'],
         'images' => [
-            'images/agency1.png',
-            'images/seo-1.png'
+            'images/seo-1.png',
+            'images/agency2.png',
+            'images/agency3.png'
         ],
         'author' => 'GrowthStudio',
         'rating' => 4.4,
@@ -524,13 +529,13 @@ $TEMPLATES = [
         'id' => 'tpl_028',
         'name' => 'Fashion E‑Commerce Lookbook',
         'category_slug' => 'ecommerce-templates',
-        'price' => 1400,
+        'price' => 14500,
         'description' => 'Lookbook‑style fashion e‑commerce template with collection pages and product highlights.',
         'features' => ['Collection Pages', 'Lookbook Grid', 'Product Highlights', 'Newsletter Signup'],
         'images' => [
+            'images/fashion3.png',
             'images/fashion1.png',
-            'images/fashion2.png',
-            'images/fashion3.png'
+            'images/fashion2.png'
         ],
         'author' => 'StyleLab',
         'rating' => 4.5,
@@ -565,8 +570,8 @@ $TEMPLATES = [
         'description' => 'Investor‑ready pitch deck template for startups to present vision, traction and roadmap.',
         'features' => ['Problem & Solution Slides', 'Market Size', 'Roadmap', 'Financial Overview'],
         'images' => [
-            'images/prst-1.png',
-            'images/prst-3.png'
+            'images/prst-3.png',
+            'images/prst-1.png'
         ],
         'author' => 'PitchCraft',
         'rating' => 4.6,
@@ -583,9 +588,9 @@ $TEMPLATES = [
         'description' => 'Analytics dashboard layout for marketing and product teams with multiple KPI views.',
         'features' => ['KPI Overview', 'Channel Breakdown', 'Trend Charts', 'Custom Filters'],
         'images' => [
-            'images/dash-1.png',
-            'images/dash-2.png',
-            'images/dash-3.png'
+            'images/data1.png',
+            'images/data2.png'
+            // 'images/dash-3.png'
         ],
         'author' => 'DataForge',
         'rating' => 4.7,
@@ -593,6 +598,186 @@ $TEMPLATES = [
         'published' => '02/07/2026',
         'file_format' => 'HTML, Bootstrap 5',
         'is_featured' => true
+    ],
+    [
+        'id' => 'tpl_032',
+        'name' => 'Minimal Invoice Template',
+        'category_slug' => 'document-templates',
+        'price' => 800,
+        'description' => 'Clean and simple invoice template suitable for freelancers and small businesses.',
+        'features' => ['Tax Breakdown', 'Due Date Highlight', 'Notes Section', 'Print Ready'],
+        'images' => [
+            'images/prst-2.png'
+        ],
+        'author' => 'DocStudio',
+        'rating' => 4.2,
+        'sales' => 45,
+        'published' => '05/07/2026',
+        'file_format' => 'Word, PDF',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_033',
+        'name' => 'Simple Resume Layout',
+        'category_slug' => 'document-templates',
+        'price' => 600,
+        'description' => 'One-page resume template with clean typography and easy customization.',
+        'features' => ['Profile Summary', 'Experience Timeline', 'Skills Highlights', 'Contact Block'],
+        'images' => [
+            'images/prst-1.png'
+        ],
+        'author' => 'CareerKit',
+        'rating' => 4.3,
+        'sales' => 52,
+        'published' => '06/07/2026',
+        'file_format' => 'Word, PDF',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_034',
+        'name' => 'Basic Landing Section Pack',
+        'category_slug' => 'page-builders',
+        'price' => 1500,
+        'description' => 'Starter pack of hero and CTA sections for simple product landing pages.',
+        'features' => ['Hero Sections', 'CTA Bands', 'Feature Rows', 'Responsive Layout'],
+        'images' => [
+            'images/saas2.png',
+            'images/saas1.png',
+            'images/saas3.png'
+        ],
+        'author' => 'StarterBlocks',
+        'rating' => 4.1,
+        'sales' => 21,
+        'published' => '07/07/2026',
+        'file_format' => 'HTML, CSS',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_035',
+        'name' => 'One-Page Portfolio Lite',
+        'category_slug' => 'website-templates',
+        'price' => 1800,
+        'description' => 'Lightweight one-page portfolio for students and entry-level professionals.',
+        'features' => ['About Section', 'Projects Grid', 'Contact Form', 'Responsive Design'],
+        'images' => [
+            'images/port-3.png',
+            'images/port-2.png'
+        ],
+        'author' => 'LiteThemes',
+        'rating' => 4.0,
+        'sales' => 19,
+        'published' => '08/07/2026',
+        'file_format' => 'HTML, CSS',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_036',
+        'name' => 'Basic Blog Layout',
+        'category_slug' => 'web-templates',
+        'price' => 1600,
+        'description' => 'Simple blog listing and post layout for content creators on a budget.',
+        'features' => ['Post List', 'Sidebar Widgets', 'Single Post Layout', 'Mobile Friendly'],
+        'images' => [
+            'images/land-2.png',
+            'images/land-1.png'
+        ],
+        'author' => 'ContentGrid',
+        'rating' => 4.1,
+        'sales' => 22,
+        'published' => '09/07/2026',
+        'file_format' => 'HTML, CSS',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_037',
+        'name' => 'Tutoring Service Flyer',
+        'category_slug' => 'educational-templates',
+        'price' => 500,
+        'description' => 'Printable flyer template for private tutors and small coaching centers.',
+        'features' => ['Service Highlights', 'Contact Info', 'Offer Badge', 'Print Ready'],
+        'images' => [
+            'images/ed3.png',
+            'images/ed2.png'
+        ],
+        'author' => 'TeachPrint',
+        'rating' => 4.0,
+        'sales' => 17,
+        'published' => '10/07/2026',
+        'file_format' => 'PDF, Word',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_038',
+        'name' => 'Clinic Appointment Card',
+        'category_slug' => 'business-assets',
+        'price' => 700,
+        'description' => 'Small appointment card layout for clinics and medical practices.',
+        'features' => ['Appointment Time', 'Doctor Name', 'Contact Details', 'Compact Size'],
+        'images' => [
+            'images/medical1.png'
+        ],
+        'author' => 'HealthPrint',
+        'rating' => 4.1,
+        'sales' => 20,
+        'published' => '11/07/2026',
+        'file_format' => 'PDF',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_039',
+        'name' => 'Simple Promo Banner Set',
+        'category_slug' => 'marketing-templates',
+        'price' => 900,
+        'description' => 'Set of web banners for seasonal promotions and discounts.',
+        'features' => ['Multiple Sizes', 'Editable Text', 'Layered Design', 'Web Ready'],
+        'images' => [
+            'images/fashion2.png',
+            'images/fashion1.png',
+            'images/fashion3.png'
+        ],
+        'author' => 'AdCraft',
+        'rating' => 4.2,
+        'sales' => 27,
+        'published' => '12/07/2026',
+        'file_format' => 'PNG, PSD',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_040',
+        'name' => 'Basic Event Landing Page',
+        'category_slug' => 'web-templates',
+        'price' => 1900,
+        'description' => 'Landing page for meetups or small events with schedule and speakers.',
+        'features' => ['Event Schedule', 'Speaker Profiles', 'Location Map', 'RSVP Button'],
+        'images' => [
+            'images/event1.png',
+            'images/event2.png'
+        ],
+        'author' => 'EventLite',
+        'rating' => 4.0,
+        'sales' => 18,
+        'published' => '13/07/2026',
+        'file_format' => 'HTML, CSS',
+        'is_featured' => false
+    ],
+    [
+        'id' => 'tpl_041',
+        'name' => 'Starter Social Media Kit',
+        'category_slug' => 'design-resources',
+        'price' => 2000,
+        'description' => 'Starter pack of social media post layouts for brands on a budget.',
+        'features' => ['Square Posts', 'Story Formats', 'Editable Text', 'Brand Colors'],
+        'images' => [
+            'images/fashion2.png',
+            'images/fash-2.png',
+            'images/fash-1.png'
+        ],
+        'author' => 'SocialStarter',
+        'rating' => 4.3,
+        'sales' => 30,
+        'published' => '14/07/2026',
+        'file_format' => 'PNG, PSD',
+        'is_featured' => false
     ]
 ];
 

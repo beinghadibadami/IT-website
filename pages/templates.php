@@ -83,6 +83,52 @@
                 <?php endforeach; ?>
             </div>
         </div>
+
+        <!-- Budget Templates -->
+        <?php
+        $budgetTemplates = array_filter(getTemplatesByCategory('all'), function ($t) {
+            return isset($t['price']) && $t['price'] >= 500 && $t['price'] <= 2000;
+        });
+        ?>
+        <?php if (!empty($budgetTemplates)): ?>
+            <div class="featured-section mb-5">
+                <h2 class="section-title mb-4">Budget Templates (₹500 – ₹2,000)</h2>
+                <div class="templates-grid">
+                    <?php foreach ($budgetTemplates as $template): ?>
+                        <div class="template-card">
+                            <div class="template-image">
+                                <img src="<?php echo $template['images'][0]; ?>"
+                                    alt="<?php echo htmlspecialchars($template['name']); ?>">
+                                <div class="template-overlay">
+                                    <a href="index.php?page=template_details&id=<?php echo $template['id']; ?>"
+                                        class="btn btn-light btn-sm">View Details</a>
+                                </div>
+                            </div>
+                            <div class="template-info">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span
+                                        class="badge badge-light"><?php echo $CATEGORIES[$template['category_slug']] ?? 'Template'; ?></span>
+                                    <div class="rating">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span><?php echo $template['rating']; ?></span>
+                                    </div>
+                                </div>
+                                <h3 class="template-title">
+                                    <a href="index.php?page=template_details&id=<?php echo $template['id']; ?>">
+                                        <?php echo htmlspecialchars($template['name']); ?>
+                                    </a>
+                                </h3>
+                                <div class="template-footer mt-3 d-flex justify-content-between align-items-center">
+                                    <span class="price">₹<?php echo number_format($template['price'], 2); ?></span>
+                                    <a href="index.php?page=template_details&id=<?php echo $template['id']; ?>"
+                                        class="btn btn-outline-primary btn-sm">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
         <hr class="my-5">
     <?php endif; ?>
 
