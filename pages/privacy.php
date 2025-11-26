@@ -10,31 +10,77 @@
         <div class="col-lg-10">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body p-5">
-                    <h3>1. Information Collection</h3>
-                    <p>We collect information from you when you register on our site, place an order, subscribe to our
-                        newsletter, or fill out a form.</p>
-
-                    <h3>2. Use of Information</h3>
-                    <p>Any of the information we collect from you may be used in one of the following ways:
-                    <ul>
-                        <li>To personalize your experience</li>
-                        <li>To improve our website</li>
-                        <li>To process transactions</li>
-                        <li>To send periodic emails</li>
-                    </ul>
+                    <h3>Privacy Policy – DIVINE SYNCSERV PRIVATE LIMITED</h3>
+                    <p>
+                        DIVINE SYNCSERV PRIVATE LIMITED ("we", "our", "us") is committed to protecting and respecting
+                        the privacy of its users and clients. This Privacy Policy explains how we collect, use, store,
+                        and safeguard personal information when users visit or avail services through
+                        <a href="https://divinesyncserve.com/" target="_blank" rel="noopener">https://divinesyncserve.com/</a>.
                     </p>
 
-                    <h3>3. Information Protection</h3>
-                    <p>We implement a variety of security measures to maintain the safety of your personal information
-                        when you place an order or enter, submit, or access your personal information.</p>
+                    <h4>Information We Collect</h4>
+                    <p>We may collect the following personal information:</p>
+                    <ul>
+                        <li>Full Name</li>
+                        <li>Email Address</li>
+                        <li>Contact Number</li>
+                        <li>Business Details</li>
+                        <li>Billing and Payment Information</li>
+                        <li>IP Address, Browser Type, and Usage Data</li>
+                    </ul>
 
-                    <h3>4. Cookies</h3>
-                    <p>We use cookies to help us remember and process the items in your shopping cart and understand and
-                        save your preferences for future visits.</p>
+                    <h4>Purpose of Data Collection</h4>
+                    <p>The information collected is used strictly for the following purposes:</p>
+                    <ul>
+                        <li>To provide IT, web development, app development, and digital marketing services</li>
+                        <li>To communicate regarding projects, quotations, and service updates</li>
+                        <li>To process payments and generate invoices</li>
+                        <li>To provide technical support and customer service</li>
+                        <li>To comply with legal, regulatory, and taxation requirements</li>
+                    </ul>
 
-                    <h3>5. Third Party Disclosure</h3>
-                    <p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable
-                        information.</p>
+                    <h4>Data Sharing &amp; Disclosure</h4>
+                    <p>We do not sell, rent, or trade customer personal data. Information may only be shared with:</p>
+                    <ul>
+                        <li>Authorized payment gateway providers for transaction processing</li>
+                        <li>Legal or regulatory authorities if required by law</li>
+                        <li>Service partners strictly for fulfillment of contracted services</li>
+                    </ul>
+
+                    <h4>Data Security</h4>
+                    <p>
+                        We implement industry-standard security measures including encryption, secure servers, firewall
+                        protection, and restricted access controls to protect user information against unauthorized
+                        access, alteration, or disclosure. All payment transactions are processed through secure,
+                        PCI-DSS compliant encrypted payment gateways.
+                    </p>
+
+                    <h4>Cookies &amp; Tracking</h4>
+                    <p>
+                        Our website may use cookies to enhance user experience, analyze website traffic, and improve
+                        service quality. Users may control or disable cookies through their browser settings.
+                    </p>
+
+                    <h4>User Rights</h4>
+                    <p>Users have the right to:</p>
+                    <ul>
+                        <li>Request access to their personal data</li>
+                        <li>Request correction of inaccurate information</li>
+                        <li>Request deletion of data subject to legal obligations</li>
+                        <li>Withdraw consent for communications at any time</li>
+                    </ul>
+
+                    <h4>Policy Updates</h4>
+                    <p>
+                        This Privacy Policy may be updated periodically. Any changes will be posted on this page with
+                        immediate effect.
+                    </p>
+
+                    <h4>Contact for Privacy Queries</h4>
+                    <p>
+                        For privacy-related queries, contact:<br>
+                        <strong>Email:</strong> <a href="mailto:support@divinesyncserve.com">support@divinesyncserve.com</a>
+                    </p>
                 </div>
             </div>
         </div>
