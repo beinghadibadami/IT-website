@@ -179,9 +179,95 @@ $currentUser = function_exists('auth_current_user') ? auth_current_user() : null
                                     After successful payment, your templates will be available in the "My Account" section.
                                 </div>
 
-                                <button type="submit" class="btn btn-dark w-100 py-3 rounded-3 fw-bold shadow-sm mb-1">
-                                    Proceed to Checkout With PayU
-                                </button>
+                                <div class="form-group mb-4">
+    <label class="mb-2 fw-semibold">Select Payment Gateway</label>
+    <div class="gateway-cards">
+        <label class="gateway-card">
+    <input type="radio" name="payment_gateway" value="payu" checked>
+    <span class="custom-radio"></span>
+    <div class="gateway-logo-center">
+        <img src="/assets/img/payu-logo.png" alt="PayU" class="gateway-logo">
+    </div>
+</label>
+        <label class="gateway-card">
+    <input type="radio" name="payment_gateway" value="hdfc_smart_gateway">
+    <span class="custom-radio"></span>
+    <div class="gateway-logo-center">
+        <img src="/assets/img/hdfc-logo.png" alt="HDFC SmartPay" class="gateway-logo">
+    </div>
+</label>
+    </div>
+</div>
+<button type="submit" class="btn btn-dark w-100 py-3 rounded-3 fw-bold shadow-sm mb-1">
+    Proceed to Payment
+</button>
+<style>
+.gateway-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.gateway-card {
+  display: flex;
+  align-items: center;
+  border: 2px solid #aaa;
+  border-radius: 16px;
+  padding: 18px 22px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+.gateway-card input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+}
+.gateway-card .custom-radio {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #222;
+  border-radius: 50%;
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.gateway-card input[type="radio"]:checked + .custom-radio::after {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #222;
+}
+.gateway-logo-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+}
+.gateway-card .gateway-logo {
+  width: 80px;
+  height: 48px;
+  object-fit: contain;
+  margin: 0;
+}
+.gateway-card .gateway-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #222;
+}
+.gateway-card input[type="radio"]:checked ~ .gateway-name {
+  font-weight: 700;
+  color: #007bff;
+}
+.gateway-card input[type="radio"]:checked ~ .custom-radio {
+  border-color: #007bff;
+}
+</style>
                             </form>
                         <?php else: ?>
                             <div class="alert alert-danger small mb-3">

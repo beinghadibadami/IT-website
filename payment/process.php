@@ -5,6 +5,7 @@ require_once '../includes/auth.php';
 
 $service = $_POST['service'] ?? '';
 $clientAmount = $_POST['amount'] ?? '';
+$paymentGateway = $_POST['payment_gateway'] ?? 'payu'; // Default to PayU if not set
 
 // For cart checkout and other payments, ensure user is logged in
 $currentUser = auth_current_user();
@@ -81,11 +82,13 @@ $surl = $protocol . '://' . $_SERVER['HTTP_HOST'] . '/payment/success.php';
 $furl = $protocol . '://' . $_SERVER['HTTP_HOST'] . '/payment/failure.php';
 
 $hash = generatePayUHash(PAYU_MERCHANT_KEY, $txnid, $amount, $productinfo, $firstname, $emailAddress, PAYU_SALT);
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
+if ($paymentGateway === 'payu') {
+    // --- PayU flow (existing) ---
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Gateway - DivineSyncServe</title>
@@ -173,3 +176,36 @@ $hash = generatePayUHash(PAYU_MERCHANT_KEY, $txnid, $amount, $productinfo, $firs
 </body>
 
 </html>
+<?php
+// End PayU branch
+}
+// HDFC branch handled below
+elseif ($paymentGateway === 'hdfc_smart_gateway') {
+    // --- HDFC Smart Gateway flow ---
+    require_once __DIR__ . '/../includes/hdfc_smart_gateway.php';
+    $hdfc = new HDFCSmartGateway();
+    // Prepare order/session data
+    $orderData = [
+        'amount' => $amount,
+        'customer_id' => $currentUser['id'] ?? ('CUST_' . time()),
+        'email' => $email,
+        'phone' => $phone,
+        'name' => $name,
+        'description' => $productinfo,
+    ];
+    $result = $hdfc->createOrder($orderData);
+    if ($result['success'] && !empty($result['payment_link'])) {
+        // Redirect user to HDFC hosted payment page
+        header('Location: ' . $result['payment_link']);
+        exit;
+    } else {
+        // Log error and show failure message
+        error_log('HDFC order creation failed: ' . json_encode($result));
+        echo '<!DOCTYPE html><html><head><title>HDFC Payment Error</title></head><body>';
+        echo '<h2>Could not initiate payment with HDFC Smart Gateway.</h2>';
+        echo '<p>' . htmlspecialchars($result['error'] ?? 'Unknown error') . '</p>';
+        echo '<a href="../index.php?page=services">Back</a>';
+        echo '</body></html>';
+        exit;
+    }
+}

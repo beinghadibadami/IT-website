@@ -5,9 +5,9 @@
 
 FROM php:8.4.15-cli
 
-# Install PostgreSQL PDO extension
+# Install PostgreSQL PDO extension and ca-certificates for SSL
 RUN apt-get update \
-    && apt-get install -y libpq-dev \
+    && apt-get install -y libpq-dev ca-certificates curl unzip \
     && docker-php-ext-install pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
 
@@ -16,6 +16,12 @@ WORKDIR /var/www/html
 
 # Copy the entire application into the container
 COPY . .
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install PHP dependencies (Juspay SDK etc.)
+RUN composer install --no-dev --optimize-autoloader
 
 # Default port for local runs; Render will override PORT env var
 ENV PORT=10000

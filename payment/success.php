@@ -51,12 +51,8 @@ if ($isPayUCallback) {
                     <strong><?php echo htmlspecialchars($txnid); ?></strong>
                 </div>
                 <div class="detail-row">
-                    <span>Service:</span>
-                    <strong><?php echo htmlspecialchars($service); ?></strong>
-                </div>
-                <div class="detail-row">
                     <span>Amount Paid:</span>
-                    <strong>$<?php echo htmlspecialchars($amount); ?></strong>
+                    <strong><?php echo htmlspecialchars($amount); ?></strong>
                 </div>
             </div>
             

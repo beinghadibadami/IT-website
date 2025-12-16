@@ -25,5 +25,14 @@
         "phone": "29293919391",
         "password_hash": "$2y$12$nOVBufgM3YRT4DvJexsNre6v0PyLVX65IS6stdcrPWou1fbbVGRQm",
         "created_at": "2025-11-22T15:50:01+00:00"
+    },
+    {
+        "id": "u_693e9af2009c58.32837545",
+        "full_name": "Rahul Thakar",
+        "email": "rtkh@gmail.com",
+        "username": "lover_boy",
+        "phone": "9977554488",
+        "password_hash": "$2y$12$TEft5MTHJsYRJE1HfNvd3OVZ4HUDu8ic8IOGUIXT\/NQ0GxTny1eAy",
+        "created_at": "2025-12-14T11:09:38+00:00"
     }
 ]
