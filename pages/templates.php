@@ -3,7 +3,7 @@
 ?>
 <div class="page-header">
     <div class="container">
-        <h1>Find the Perfect Template for Your Next Project</h1>
+        <h1 class="page-title">Find the Perfect Template for Your Next Project</h1>
         <p>Thousands of high-quality templates created by world-class designers</p>
     </div>
 </div>
@@ -134,7 +134,8 @@
 
     <!-- All Templates Grid -->
     <h2 class="section-title mb-4">
-        <?php echo isset($_GET['category']) ? $CATEGORIES[$_GET['category']] : 'All Templates'; ?></h2>
+        <?php echo isset($_GET['category']) ? $CATEGORIES[$_GET['category']] : 'All Templates'; ?>
+    </h2>
     <div class="templates-grid">
         <?php
         $category = $_GET['category'] ?? 'all';

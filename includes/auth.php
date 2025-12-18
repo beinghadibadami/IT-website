@@ -5,52 +5,18 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once __DIR__ . '/config.php';
-
-function auth_users_file_path()
-{
-    return __DIR__ . '/../data/users.json';
-}
-
-function auth_load_users()
-{
-    $path = auth_users_file_path();
-    if (!file_exists($path)) {
-        return [];
-    }
-    $json = file_get_contents($path);
-    $data = json_decode($json, true);
-    return is_array($data) ? $data : [];
-}
-
-function auth_save_users(array $users)
-{
-    $path = auth_users_file_path();
-    if (!is_dir(dirname($path))) {
-        mkdir(dirname($path), 0755, true);
-    }
-    file_put_contents($path, json_encode($users, JSON_PRETTY_PRINT));
-}
+require_once __DIR__ . '/mongo.php';
 
 function auth_find_user_by_email($email)
 {
-    $users = auth_load_users();
-    foreach ($users as $user) {
-        if (strcasecmp($user['email'], $email) === 0) {
-            return $user;
-        }
-    }
-    return null;
+    global $users;
+    return $users->findOne(['email' => strtolower($email)]);
 }
 
 function auth_find_user_by_username($username)
 {
-    $users = auth_load_users();
-    foreach ($users as $user) {
-        if (strcasecmp($user['username'], $username) === 0) {
-            return $user;
-        }
-    }
-    return null;
+    global $users;
+    return $users->findOne(['username' => $username]);
 }
 
 function auth_register_user($fullName, $email, $username, $phone, $password, $confirmPassword, &$errors)
@@ -87,23 +53,31 @@ function auth_register_user($fullName, $email, $username, $phone, $password, $co
         return null;
     }
 
-    $users = auth_load_users();
-    $id = uniqid('u_', true);
-
+    global $users;
+    
     $user = [
-        'id' => $id,
         'full_name' => $fullName,
         'email' => strtolower($email),
         'username' => $username,
         'phone' => $phone,
         'password_hash' => password_hash($password, PASSWORD_DEFAULT),
-        'created_at' => date('c')
+        'created_at' => new MongoDB\BSON\UTCDateTime(),
+        'updated_at' => new MongoDB\BSON\UTCDateTime()
     ];
 
-    $users[] = $user;
-    auth_save_users($users);
-
-    return $user;
+    try {
+        $result = $users->insertOne($user);
+        $user['_id'] = $result->getInsertedId();
+        
+        // Ensure _id is a string in the returned user array
+        $user['id'] = (string)$user['_id'];
+        
+        return $user;
+    } catch (Exception $e) {
+        error_log('Error registering user: ' . $e->getMessage());
+        $errors['general'] = 'Failed to create user account. Please try again.';
+        return null;
+    }
 }
 
 function auth_authenticate($email, $password, &$errors)
@@ -115,12 +89,19 @@ function auth_authenticate($email, $password, &$errors)
     }
 
     $user = auth_find_user_by_email($email);
-    if (!$user || !password_verify($password, $user['password_hash'])) {
+    if (!$user || !password_verify($password, $user->password_hash)) {
         $errors['general'] = 'Invalid email or password.';
         return null;
     }
-
-    return $user;
+    
+    $userArray = json_decode(json_encode($user), true);
+    
+    // Ensure we have both _id and id fields for backward compatibility
+    if (isset($userArray['_id'])) {
+        $userArray['id'] = (string)$userArray['_id'];
+    }
+    
+    return $userArray;
 }
 
 function auth_base64url_encode($data)
@@ -188,14 +169,27 @@ function auth_verify_jwt($token)
 
 function auth_login_user(array $user)
 {
+    // Make sure we have the user ID and it's a string
+    $userId = is_object($user['_id']) && method_exists($user['_id'], '__toString') 
+        ? (string)$user['_id'] 
+        : $user['_id'] ?? null;
+
+    if (!$userId) {
+        error_log('Cannot login user: No user ID found');
+        return false;
+    }
+
     $payload = [
-        'sub' => $user['id'],
-        'email' => $user['email'],
-        'name' => $user['full_name'],
-        'username' => $user['username']
+        'sub' => $userId,  // Use _id as the subject
+        'email' => $user['email'] ?? '',
+        'name' => $user['full_name'] ?? '',
+        'username' => $user['username'] ?? '',
+        'iat' => time(),  // Issued at
+        'exp' => time() + JWT_EXPIRY_SECONDS  // Expiration time
     ];
+    
     $token = auth_generate_jwt($payload);
-    setcookie('auth_token', $token, time() + JWT_EXPIRY_SECONDS, '/', '', false, true);
+    return setcookie('auth_token', $token, time() + JWT_EXPIRY_SECONDS, '/', '', false, true);
 }
 
 function auth_logout_user()
@@ -208,16 +202,48 @@ function auth_current_user()
     if (!isset($_COOKIE['auth_token'])) {
         return null;
     }
+    
     $payload = auth_verify_jwt($_COOKIE['auth_token']);
     if (!$payload || !isset($payload['sub'])) {
         return null;
     }
 
-    $users = auth_load_users();
-    foreach ($users as $user) {
-        if ($user['id'] === $payload['sub']) {
-            return $user;
+    global $users;
+    
+    try {
+        // Get the user ID from the payload
+        $userId = $payload['sub'];
+        
+        // If it's an array, try to get the $oid field
+        if (is_array($userId)) {
+            $userId = $userId['$oid'] ?? null;
         }
+        
+        // If we still don't have a valid ID, log and return
+        if (!$userId) {
+            error_log('Invalid user ID format in JWT payload: ' . json_encode($payload));
+            return null;
+        }
+
+        // Convert string ID to ObjectId
+        $userId = new MongoDB\BSON\ObjectId($userId);
+        
+        // Find the user
+        $user = $users->findOne(['_id' => $userId]);
+        
+        if ($user) {
+            // Convert to array
+            $userArray = json_decode(json_encode($user), true);
+            
+            // Ensure consistent ID format
+            if (isset($userArray['_id'])) {
+                $userArray['id'] = $userArray['_id'];
+            }
+            
+            return $userArray;
+        }
+    } catch (Exception $e) {
+        error_log('Error in auth_current_user: ' . $e->getMessage() . ' | Payload: ' . json_encode($payload));
     }
 
     return null;

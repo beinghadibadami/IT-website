@@ -179,7 +179,7 @@ $currentUser = function_exists('auth_current_user') ? auth_current_user() : null
                                     After successful payment, your templates will be available in the "My Account" section.
                                 </div>
 
-                                <div class="form-group mb-4">
+                                <!-- <div class="form-group mb-4">
     <label class="mb-2 fw-semibold">Select Payment Gateway</label>
     <div class="gateway-cards">
         <label class="gateway-card">
@@ -196,7 +196,7 @@ $currentUser = function_exists('auth_current_user') ? auth_current_user() : null
         <img src="/assets/img/hdfc-logo.png" alt="HDFC SmartPay" class="gateway-logo">
     </div>
 </label>
-    </div>
+    </div> -->
 </div>
 <button type="submit" class="btn btn-dark w-100 py-3 rounded-3 fw-bold shadow-sm mb-1">
     Proceed to Payment

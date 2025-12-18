@@ -211,110 +211,104 @@
                     <input type="number" id="customerAmount" name="customerAmount" min="500" step="1">
                 </div>
 
-                <!-- <div class="form-group">
-                    <label for="customerName">Full Name *</label>
-                    <input type="text" id="customerName" name="name" required placeholder="Enter your full name">
-                </div>
+                <!-- <div class="form-group mb-4"> -->
+                <!-- <label class="mb-2 fw-semibold">Select Payment Gateway</label> -->
+                <!-- <div class="gateway-cards">
+                        <label class="gateway-card">
+                    <input type="radio" name="payment_gateway" value="payu" checked>
+                    <span class="custom-radio"></span>
+                    <div class="gateway-logo-center">
+                        <img src="/assets/img/payu-logo.png" alt="PayU" class="gateway-logo">
+                    </div>
+                </label> -->
+                <!-- <label class="gateway-card">
+                    <input type="radio" name="payment_gateway" value="hdfc_smart_gateway">
+                    <span class="custom-radio"></span>
+                    <div class="gateway-logo-center">
+                        <img src="/assets/img/hdfc-logo.png" alt="HDFC SmartPay" class="gateway-logo" height="60" width="90">
+                    </div>
+                </label> -->
+                <!-- </div> -->
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Proceed to Payment</button>
+        </form>
+        <style>
+            .gateway-cards {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+            }
 
-                <div class="form-group">
-                    <label for="customerEmail">Email Address *</label>
-                    <input type="email" id="customerEmail" name="email" required placeholder="Enter your email">
-                </div>
+            .gateway-card {
+                display: flex;
+                align-items: center;
+                border: 2px solid #aaa;
+                border-radius: 16px;
+                padding: 18px 22px;
+                cursor: pointer;
+                position: relative;
+                transition: border-color 0.2s;
+                background: #fff;
+            }
 
-                <div class="form-group">
-                    <label for="customerPhone">Phone Number *</label>
-                    <input type="number" id="customerPhone" name="phone" required pattern="[0-9]" maxlength="10"
-                        placeholder="Enter 10-digit phone number">
-                </div> -->
+            .gateway-card input[type="radio"] {
+                opacity: 0;
+                position: absolute;
+            }
 
-                <div class="form-group mb-4">
-    <label class="mb-2 fw-semibold">Select Payment Gateway</label>
-    <div class="gateway-cards">
-        <label class="gateway-card">
-    <input type="radio" name="payment_gateway" value="payu" checked>
-    <span class="custom-radio"></span>
-    <div class="gateway-logo-center">
-        <img src="/assets/img/payu-logo.png" alt="PayU" class="gateway-logo">
-    </div>
-</label>
-        <label class="gateway-card">
-    <input type="radio" name="payment_gateway" value="hdfc_smart_gateway">
-    <span class="custom-radio"></span>
-    <div class="gateway-logo-center">
-        <img src="/assets/img/hdfc-logo.png" alt="HDFC SmartPay" class="gateway-logo" height="60" width="90">
-    </div>
-</label>
+            .gateway-card .custom-radio {
+                width: 22px;
+                height: 22px;
+                border: 2px solid #222;
+                border-radius: 50%;
+                margin-right: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+            }
+
+            .gateway-card input[type="radio"]:checked+.custom-radio::after {
+                content: '';
+                display: block;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #222;
+            }
+
+            .gateway-logo-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 80px;
+            }
+
+            .gateway-card .gateway-logo {
+                width: 150px;
+                height: 90px;
+                object-fit: contain;
+                margin: 0;
+            }
+
+            .gateway-card .gateway-name {
+                font-size: 1.1rem;
+                font-weight: 500;
+                letter-spacing: 0.03em;
+                color: #222;
+            }
+
+            .gateway-card input[type="radio"]:checked~.gateway-name {
+                font-weight: 700;
+                color: #007bff;
+            }
+
+            .gateway-card input[type="radio"]:checked~.custom-radio {
+                border-color: #007bff;
+            }
+        </style>
+        </form>
     </div>
 </div>
-<button type="submit" class="btn btn-primary btn-block">Proceed to Payment</button>
-<style>
-.gateway-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.gateway-card {
-  display: flex;
-  align-items: center;
-  border: 2px solid #aaa;
-  border-radius: 16px;
-  padding: 18px 22px;
-  cursor: pointer;
-  position: relative;
-  transition: border-color 0.2s;
-  background: #fff;
-}
-.gateway-card input[type="radio"] {
-  opacity: 0;
-  position: absolute;
-}
-.gateway-card .custom-radio {
-  width: 22px;
-  height: 22px;
-  border: 2px solid #222;
-  border-radius: 50%;
-  margin-right: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-}
-.gateway-card input[type="radio"]:checked + .custom-radio::after {
-  content: '';
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #222;
-}
-.gateway-logo-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 80px;
-}
-.gateway-card .gateway-logo {
-  width: 150px;
-  height: 90px;
-  object-fit: contain;
-  margin: 0;
-}
-.gateway-card .gateway-name {
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  color: #222;
-}
-.gateway-card input[type="radio"]:checked ~ .gateway-name {
-  font-weight: 700;
-  color: #007bff;
-}
-.gateway-card input[type="radio"]:checked ~ .custom-radio {
-  border-color: #007bff;
-}
-</style>
-            </form>
-        </div>
-    </div>
 </div>

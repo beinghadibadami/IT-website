@@ -1,34 +1,38 @@
-# Simple Dockerfile for deploying this PHP site on Render using Docker
-# - Uses official PHP CLI image with built-in web server
-# - Serves the application from /var/www/html
-# - Listens on the PORT environment variable (Render sets this, default 10000)
-
 FROM php:8.4.15-cli
 
-# Install PostgreSQL PDO extension and ca-certificates for SSL
+# Install system dependencies
 RUN apt-get update \
-    && apt-get install -y libpq-dev ca-certificates curl unzip \
-    && docker-php-ext-install pdo_pgsql \
+    && apt-get install -y \
+        libpq-dev \
+        libssl-dev \
+        ca-certificates \
+        curl \
+        unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory inside the container
+# Install PHP extensions
+RUN docker-php-ext-install
+
+# Install MongoDB PHP extension
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
+
+# Set working directory
 WORKDIR /var/www/html
 
-# Copy the entire application into the container
+# Copy app
 COPY . .
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    -- --install-dir=/usr/local/bin --filename=composer
 
-# Install PHP dependencies (Juspay SDK etc.)
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Default port for local runs; Render will override PORT env var
+# Render / Heroku port
 ENV PORT=10000
-
-# Documented container port (Render will route traffic here)
 EXPOSE 10000
 
-# Start PHP's built-in web server
-# Render sets PORT, so we bind to 0.0.0.0:$PORT and serve the app from the current directory
+# Start PHP built-in server
 CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-10000}"]

@@ -1,5 +1,6 @@
 {
     "require": {
-        "juspay/expresscheckout-php-sdk": "^2.0"
+        "juspay/expresscheckout-php-sdk": "^2.0",
+        "mongodb/mongodb": "^2.1"
     }
 }

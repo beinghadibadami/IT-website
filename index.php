@@ -4,6 +4,7 @@ require_once 'includes/auth.php';
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 $title = "Divine SyncServe - Innovative IT Solutions";
 
+require_once __DIR__ . '/includes/mongo.php';
 // Handle auth-related actions BEFORE any HTML output
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $page === 'login') {
     $email = trim($_POST['email'] ?? '');
