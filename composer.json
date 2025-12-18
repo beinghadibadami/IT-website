@@ -2,5 +2,13 @@
     "require": {
         "juspay/expresscheckout-php-sdk": "^2.0",
         "mongodb/mongodb": "^2.1"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php scripts/patch_juspay.php"
+        ],
+        "post-update-cmd": [
+            "php scripts/patch_juspay.php"
+        ]
     }
 }
