@@ -5,7 +5,8 @@
 
 require_once __DIR__ . '/../includes/hdfc_config.php';
 
-class HDFCSmartGateway {
+class HDFCSmartGateway
+{
     private $merchantId;
     private $clientId;
     private $apiKey;
@@ -17,7 +18,8 @@ class HDFCSmartGateway {
     private $returnUrl;
     private $responseKey;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->merchantId = HDFC_MERCHANT_ID;
         $this->clientId = HDFC_CLIENT_ID;
         $this->apiKey = HDFC_API_KEY;
@@ -30,7 +32,8 @@ class HDFCSmartGateway {
         $this->baseUrl = $this->environment === 'production' ? HDFC_PRODUCTION_BASE_URL : HDFC_SANDBOX_BASE_URL;
     }
 
-    public function createOrder($orderData) {
+    public function createOrder($orderData)
+    {
         // Compose payload for Juspay/SmartGateway
         $orderId = 'ORD_' . time() . '_' . rand(1000, 9999);
         $payload = [
@@ -63,14 +66,16 @@ class HDFCSmartGateway {
     }
 
     // Server-to-server order status verification
-    public function getOrderStatus($orderId) {
+    public function getOrderStatus($orderId)
+    {
         $payload = [
             'order_id' => $orderId,
         ];
         return $this->makeApiCall('/order/status', $payload);
     }
 
-    private function makeApiCall($endpoint, $payload) {
+    private function makeApiCall($endpoint, $payload)
+    {
         $url = $this->baseUrl . $endpoint;
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -78,15 +83,17 @@ class HDFCSmartGateway {
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/x-www-form-urlencoded',
+            'Accept: application/json',
             'x-merchantid: ' . $this->merchantId,
         ]);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
         curl_setopt($ch, CURLOPT_USERPWD, $this->apiKey . ':');
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         $response = curl_exec($ch);
         $error = curl_error($ch);
-        curl_close($ch);
+        // curl_close($ch); // Removed to fix PHP 8.5 deprecation warning
         if ($error) {
             return ['success' => false, 'error_message' => 'cURL Error: ' . $error];
         }
