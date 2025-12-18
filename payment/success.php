@@ -13,9 +13,9 @@ if ($isPayUCallback) {
     $email = $_POST['email'] ?? '';
     $hash = $_POST['hash'] ?? '';
     $additionalCharges = $_POST['additionalCharges'] ?? '';
-    
+
     $isValid = verifyPayUHash(PAYU_MERCHANT_KEY, $txnid, $amount, $service, $firstname, $email, $status, PAYU_SALT, $hash, $additionalCharges);
-    
+
     if (!$isValid || $status !== 'success') {
         header('Location: failure.php');
         exit;
@@ -28,14 +28,16 @@ if ($isPayUCallback) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Successful - DivineSyncServe</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=<?php echo filemtime('../assets/css/style.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="payment-result-page">
         <div class="result-container success">
@@ -44,7 +46,7 @@ if ($isPayUCallback) {
             </div>
             <h1>Payment Successful!</h1>
             <p>Thank you for your purchase. Your transaction has been completed successfully.</p>
-            
+
             <div class="result-details">
                 <div class="detail-row">
                     <span>Transaction ID:</span>
@@ -55,9 +57,9 @@ if ($isPayUCallback) {
                     <strong><?php echo htmlspecialchars($amount); ?></strong>
                 </div>
             </div>
-            
+
             <p class="result-message">We'll contact you shortly to begin working on your project.</p>
-            
+
             <div class="result-actions">
                 <a href="../index.php?page=home" class="btn btn-primary">Back to Home</a>
                 <a href="../index.php?page=services" class="btn btn-secondary">View Services</a>
@@ -65,4 +67,5 @@ if ($isPayUCallback) {
         </div>
     </div>
 </body>
+
 </html>

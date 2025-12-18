@@ -93,7 +93,7 @@ if ($paymentGateway === 'payu') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Payment Gateway - DivineSyncServe</title>
-        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/style.css?v=<?php echo filemtime('../assets/css/style.css'); ?>">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </head>
 
@@ -175,11 +175,12 @@ if ($paymentGateway === 'payu') {
 }
 // HDFC branch handled below
 elseif ($paymentGateway === 'hdfc_smart_gateway') {
-    // --- HDFC Smart Gateway flow ---
+
     require_once __DIR__ . '/../includes/hdfc_smart_gateway.php';
     require_once __DIR__ . '/../includes/mongo.php';
+
     $hdfc = new HDFCSmartGateway();
-    // Prepare order/session data
+
     $orderData = [
         'amount' => $amount,
         'customer_id' => $currentUser['id'] ?? ('CUST_' . time()),
@@ -188,39 +189,27 @@ elseif ($paymentGateway === 'hdfc_smart_gateway') {
         'name' => $name,
         'description' => $productinfo,
     ];
+
     $result = $hdfc->createOrder($orderData);
+
     if ($result['success'] && !empty($result['payment_link'])) {
-        // Store transaction in MongoDB (user_id can be null)
+
         insert_transaction($transactions, [
             'user_id' => $currentUser['id'] ?? null,
             'gateway' => 'hdfc_smart_gateway',
             'order_id' => $result['order_id'],
             'amount' => $amount,
             'currency' => 'INR',
-            'status' => 'Success',
-            'customer' => [
-                'name' => $name,
-                'email' => $email,
-                'phone' => $phone
-            ],
-            'gateway_status' => 'Success',
-            'gateway_response' => $result['response'],
-            'meta' => [
-                'service' => $service ?? "Template",
-                'description' => $productinfo ?? null
-            ]
+            'status' => 'INITIATED',
+            'gateway_response' => $result['response']
         ]);
-        // Redirect user to HDFC hosted payment page
+
         header('Location: ' . $result['payment_link']);
         exit;
-    } else {
-        // Log error and show failure message
-        error_log('HDFC order creation failed: ' . json_encode($result));
-        echo '<!DOCTYPE html><html><head><title>HDFC Payment Error</title></head><body>';
-        echo '<h2>Could not initiate payment with HDFC Smart Gateway.</h2>';
-        echo '<p>' . htmlspecialchars($result['error'] ?? 'Unknown error') . '</p>';
-        echo '<a href="../index.php?page=services">Back</a>';
-        echo '</body></html>';
-        exit;
     }
+
+    error_log('HDFC order creation failed: ' . json_encode($result));
+    $errorMsg = $result['error'] ?? 'Unable to initiate payment';
+    header('Location: ../payment/failure.php?status=init_failed&error_message=' . urlencode($errorMsg));
+    exit;
 }

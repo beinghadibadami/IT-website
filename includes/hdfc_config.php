@@ -17,5 +17,6 @@ define('HDFC_COUNTRY', 'IN');
 
 // Return/Callback URL for payment status update
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-define('HDFC_RETURN_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/payment/hdfc_callback.php');
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+define('HDFC_RETURN_URL', $protocol . '://' . $host . '/payment/hdfc_callback.php');
 

@@ -59,6 +59,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $page === 'signup') {
     exit;
 }
 
+// Handle Profile Update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $page === 'account' && isset($_GET['action']) && $_GET['action'] === 'update_profile') {
+    if (!auth_is_authenticated()) {
+        header('Location: index.php?page=login');
+        exit;
+    }
+
+    $currentUser = auth_current_user();
+    $userId = $currentUser['id']; // Ensure this is available from auth_current_user
+
+    $data = [
+        'full_name' => trim($_POST['full_name'] ?? ''),
+        'email' => trim($_POST['email'] ?? ''),
+        'username' => trim($_POST['username'] ?? ''),
+        'phone' => trim($_POST['phone'] ?? '')
+    ];
+
+    $errors = [];
+    if (auth_update_user($userId, $data, $errors)) {
+        $_SESSION['toast_message'] = 'Profile updated successfully';
+        $_SESSION['toast_type'] = 'success';
+        header('Location: index.php?page=account');
+        exit;
+    } else {
+        $_SESSION['update_errors'] = $errors;
+        $_SESSION['toast_message'] = $errors['general'] ?? 'Please fix the errors';
+        $_SESSION['toast_type'] = 'warning';
+        header('Location: index.php?page=account'); // Stay on account page to show errors
+        exit;
+    }
+}
+
 // Logout action
 if ($page === 'account' && isset($_GET['action']) && $_GET['action'] === 'logout') {
     auth_logout_user();
@@ -141,7 +173,7 @@ switch ($page) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo filemtime('assets/css/style.css'); ?>">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -201,7 +233,7 @@ switch ($page) {
 
     <?php if (!empty($_SESSION['toast_message'])): ?>
         <script>
-            window.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('DOMContentLoaded', function () {
                 if (typeof showToast === 'function') {
                     showToast('<?php echo addslashes($_SESSION['toast_message']); ?>', '<?php echo $_SESSION['toast_type'] ?? 'info'; ?>');
                 }

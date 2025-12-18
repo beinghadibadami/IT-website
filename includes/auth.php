@@ -239,7 +239,14 @@ function auth_current_user()
 
             // Ensure consistent ID format
             if (isset($userArray['_id'])) {
-                $userArray['id'] = $userArray['_id'];
+                $oid = $userArray['_id'];
+                if (is_array($oid) && isset($oid['$oid'])) {
+                    $userArray['id'] = $oid['$oid'];
+                } elseif (is_object($oid) && method_exists($oid, '__toString')) {
+                    $userArray['id'] = (string) $oid;
+                } else {
+                    $userArray['id'] = (string) $oid; // Fallback
+                }
             }
 
             return $userArray;
@@ -254,4 +261,81 @@ function auth_current_user()
 function auth_is_authenticated()
 {
     return auth_current_user() !== null;
+}
+
+function auth_update_user($userId, $data, &$errors)
+{
+    global $users;
+    $errors = [];
+
+    // Validation
+    if (empty($data['full_name'])) {
+        $errors['full_name'] = 'Full name is required.';
+    }
+
+    if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Valid email is required.';
+    }
+
+    if (empty($data['username'])) {
+        $errors['username'] = 'Username is required.';
+    }
+
+    if (empty($data['phone']) || !preg_match('/^[0-9]{7,15}$/', $data['phone'])) {
+        $errors['phone'] = 'Valid phone number is required.';
+    }
+
+    // Check for uniqueness if email/username changed
+    // We need to exclude the current user from the check
+    $normalizedUserId = $userId;
+    if (is_array($userId) && isset($userId['$oid'])) {
+        $normalizedUserId = $userId['$oid'];
+    } elseif (is_object($userId) && method_exists($userId, '__toString')) {
+        $normalizedUserId = (string) $userId;
+    }
+
+    $currentUser = $users->findOne(['_id' => new MongoDB\BSON\ObjectId($normalizedUserId)]);
+    if (!$currentUser) {
+        $errors['general'] = 'User not found.';
+        return false;
+    }
+
+    if ($data['email'] !== $currentUser['email']) {
+        $existing = $users->findOne(['email' => strtolower($data['email'])]);
+        if ($existing) {
+            $errors['email'] = 'Email is already registered.';
+        }
+    }
+
+    if ($data['username'] !== $currentUser['username']) {
+        $existing = $users->findOne(['username' => $data['username']]);
+        if ($existing) {
+            $errors['username'] = 'Username is already taken.';
+        }
+    }
+
+    if (!empty($errors)) {
+        return false;
+    }
+
+    // Update
+    $updateData = [
+        'full_name' => $data['full_name'],
+        'email' => strtolower($data['email']),
+        'username' => $data['username'],
+        'phone' => $data['phone'],
+        'updated_at' => new MongoDB\BSON\UTCDateTime()
+    ];
+
+    try {
+        $users->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectId($userId)],
+            ['$set' => $updateData]
+        );
+        return true;
+    } catch (Exception $e) {
+        error_log('Error updating user: ' . $e->getMessage());
+        $errors['general'] = 'Failed to update profile.';
+        return false;
+    }
 }
