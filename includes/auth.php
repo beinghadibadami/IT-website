@@ -54,7 +54,7 @@ function auth_register_user($fullName, $email, $username, $phone, $password, $co
     }
 
     global $users;
-    
+
     $user = [
         'full_name' => $fullName,
         'email' => strtolower($email),
@@ -68,10 +68,10 @@ function auth_register_user($fullName, $email, $username, $phone, $password, $co
     try {
         $result = $users->insertOne($user);
         $user['_id'] = $result->getInsertedId();
-        
+
         // Ensure _id is a string in the returned user array
-        $user['id'] = (string)$user['_id'];
-        
+        $user['id'] = (string) $user['_id'];
+
         return $user;
     } catch (Exception $e) {
         error_log('Error registering user: ' . $e->getMessage());
@@ -93,14 +93,14 @@ function auth_authenticate($email, $password, &$errors)
         $errors['general'] = 'Invalid email or password.';
         return null;
     }
-    
+
     $userArray = json_decode(json_encode($user), true);
-    
+
     // Ensure we have both _id and id fields for backward compatibility
     if (isset($userArray['_id'])) {
-        $userArray['id'] = (string)$userArray['_id'];
+        $userArray['id'] = (string) $userArray['_id'];
     }
-    
+
     return $userArray;
 }
 
@@ -170,8 +170,8 @@ function auth_verify_jwt($token)
 function auth_login_user(array $user)
 {
     // Make sure we have the user ID and it's a string
-    $userId = is_object($user['_id']) && method_exists($user['_id'], '__toString') 
-        ? (string)$user['_id'] 
+    $userId = is_object($user['_id']) && method_exists($user['_id'], '__toString')
+        ? (string) $user['_id']
         : $user['_id'] ?? null;
 
     if (!$userId) {
@@ -187,7 +187,7 @@ function auth_login_user(array $user)
         'iat' => time(),  // Issued at
         'exp' => time() + JWT_EXPIRY_SECONDS  // Expiration time
     ];
-    
+
     $token = auth_generate_jwt($payload);
     return setcookie('auth_token', $token, time() + JWT_EXPIRY_SECONDS, '/', '', false, true);
 }
@@ -202,44 +202,46 @@ function auth_current_user()
     if (!isset($_COOKIE['auth_token'])) {
         return null;
     }
-    
+
     $payload = auth_verify_jwt($_COOKIE['auth_token']);
     if (!$payload || !isset($payload['sub'])) {
         return null;
     }
 
     global $users;
-    
+
     try {
         // Get the user ID from the payload
         $userId = $payload['sub'];
-        
+
         // If it's an array, try to get the $oid field
         if (is_array($userId)) {
             $userId = $userId['$oid'] ?? null;
         }
-        
+
         // If we still don't have a valid ID, log and return
         if (!$userId) {
             error_log('Invalid user ID format in JWT payload: ' . json_encode($payload));
             return null;
         }
 
-        // Convert string ID to ObjectId
-        $userId = new MongoDB\BSON\ObjectId($userId);
-        
+        // Convert string ID to ObjectId only if it looks like one
+        if (preg_match('/^[0-9a-fA-F]{24}$/', $userId)) {
+            $userId = new MongoDB\BSON\ObjectId($userId);
+        }
+
         // Find the user
         $user = $users->findOne(['_id' => $userId]);
-        
+
         if ($user) {
             // Convert to array
             $userArray = json_decode(json_encode($user), true);
-            
+
             // Ensure consistent ID format
             if (isset($userArray['_id'])) {
                 $userArray['id'] = $userArray['_id'];
             }
-            
+
             return $userArray;
         }
     } catch (Exception $e) {
