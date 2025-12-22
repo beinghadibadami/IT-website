@@ -201,6 +201,11 @@ elseif ($paymentGateway === 'hdfc_smart_gateway') {
             'amount' => $amount,
             'currency' => 'INR',
             'status' => 'INITIATED',
+            'customer' => [
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone
+            ],
             'gateway_response' => $result['response']
         ]);
 
