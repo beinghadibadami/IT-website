@@ -2,16 +2,24 @@
 // HDFC Smart Gateway configuration
 // DO NOT expose these values in frontend or public code
 
-define('HDFC_MERCHANT_ID', getenv('HDFC_MERCHANT_ID') ?: 'SG4091');
-define('HDFC_CLIENT_ID', getenv('HDFC_CLIENT_ID') ?: 'hdfcmaster');
-define('HDFC_API_KEY', getenv('HDFC_API_KEY') ?: '821F33ADD6B49889190C4012129002');
-// define('HDFC_API_SECRET', getenv('HDFC_API_SECRET') ?: '');
+// Environment: 'sandbox' or 'production'
 define('HDFC_ENVIRONMENT', getenv('HDFC_ENVIRONMENT') ?: 'sandbox');
 
-define('HDFC_RESPONSE_KEY', getenv('HDFC_RESPONSE_KEY') ?: '10A39E24C274E70AE23A3255303184');
+if (HDFC_ENVIRONMENT === 'production') {
+    // PRODUCTION CREDENTIALS (Get these from your HDFC/Juspay Production Dashboard)
+    define('HDFC_MERCHANT_ID', getenv('HDFC_PROD_MERCHANT_ID') ?: 'YOUR_PRODUCTION_MERCHANT_ID');
+    define('HDFC_CLIENT_ID', getenv('HDFC_PROD_CLIENT_ID') ?: 'YOUR_PRODUCTION_CLIENT_ID');
+    define('HDFC_API_KEY', getenv('HDFC_PROD_API_KEY') ?: 'YOUR_PRODUCTION_API_KEY');
+    define('HDFC_BASE_URL', 'https://smartgateway.hdfc.hdfcbank.com/');
+} else {
+    // SANDBOX CREDENTIALS (Default / Test values)
+    define('HDFC_MERCHANT_ID', getenv('HDFC_SANDBOX_MERCHANT_ID') ?: 'SG4091');
+    define('HDFC_CLIENT_ID', getenv('HDFC_SANDBOX_CLIENT_ID') ?: 'hdfcmaster');
+    define('HDFC_API_KEY', getenv('HDFC_SANDBOX_API_KEY') ?: '821F33ADD6B49889190C4012129002');
+    define('HDFC_BASE_URL', 'https://smartgatewayuat.hdfcbank.com');
+}
 
-define('HDFC_SANDBOX_BASE_URL', 'https://smartgatewayuat.hdfcbank.com');
-define('HDFC_PRODUCTION_BASE_URL', 'https://api.juspay.in');
+// Common Configuration
 define('HDFC_CURRENCY', 'INR');
 define('HDFC_COUNTRY', 'IN');
 

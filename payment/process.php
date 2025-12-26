@@ -55,10 +55,20 @@ if ($service === 'Google Ads' || $service === 'Meta Ads') {
     // Create product info from cart
     $cartItems = getCart();
     $itemNames = [];
+    $products = []; // Array to store detailed product info for DB
+
     foreach ($cartItems as $id => $qty) {
         $tpl = getTemplateById($id);
         if ($tpl) {
             $itemNames[] = $tpl['name'] . ' (x' . $qty . ')';
+            $products[] = [
+                'item_id' => $id,
+                'name' => $tpl['name'],
+                'type' => 'template',
+                'price' => (float) $tpl['price'],
+                'quantity' => (int) $qty,
+                'subtotal' => (float) $tpl['price'] * (int) $qty
+            ];
         }
     }
     $productinfo = implode(', ', $itemNames);
@@ -68,6 +78,16 @@ if ($service === 'Google Ads' || $service === 'Meta Ads') {
     }
 } else {
     $amount = $serverPrice;
+    $products = [
+        [
+            'item_id' => 'svc_' . strtolower(str_replace(' ', '_', $service)), // Generate ID: svc_cloud_solutions
+            'name' => $service,
+            'type' => 'service',
+            'price' => (float) $amount,
+            'quantity' => 1,
+            'subtotal' => (float) $amount
+        ]
+    ];
 }
 
 $txnid = 'TXN' . time() . rand(1000, 9999);
@@ -206,6 +226,7 @@ elseif ($paymentGateway === 'hdfc_smart_gateway') {
                 'email' => $email,
                 'phone' => $phone
             ],
+            'products' => $products, // Store detailed product info
             'gateway_response' => $result['response']
         ]);
 

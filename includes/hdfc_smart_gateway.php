@@ -17,7 +17,7 @@ class HDFCSmartGateway
     public function __construct()
     {
         // Determine environment (sandbox/production)
-        $this->environment = HDFC_ENVIRONMENT === 'production' ? 'production' : 'sandbox';
+        $this->environment = HDFC_ENVIRONMENT;
         $this->currency = HDFC_CURRENCY;
         $this->returnUrl = HDFC_RETURN_URL;
 
@@ -25,12 +25,13 @@ class HDFCSmartGateway
         try {
             JuspayEnvironment::init()
                 ->withMerchantId(HDFC_MERCHANT_ID)
-                ->withBaseUrl($this->environment === 'production' ? "https://api.juspay.in" : "https://smartgatewayuat.hdfcbank.com")
+                ->withBaseUrl(HDFC_BASE_URL)
                 ->withApiKey(HDFC_API_KEY);
 
+            error_log("Juspay SDK Initialized for " . $this->environment . " with Merchant ID: " . HDFC_MERCHANT_ID);
 
         } catch (Exception $e) {
-            error_log("Juspay SDK Init Error: " . $e->getMessage());
+            error_log("CRITICAL: Juspay SDK Init Error: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine());
         }
     }
 
